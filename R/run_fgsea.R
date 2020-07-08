@@ -42,6 +42,7 @@ fgsea
 # No significance here - but let's look at the plots anyway
 
 
+
 #### Plots ####
 
 # Get the ranking the expression value for each gene used in fgsea
@@ -49,12 +50,14 @@ corRanks <- var(scale(t(expr.mat)), scale(as.numeric(ERstatus))[, 1])[,1] # Thes
 stats <- corRanks[order(corRanks, decreasing=TRUE)] 
 
 
-# Barcode plots per gene set
+# Separate barcode plots per gene set
 for (g in names(gene_lists)) {
   replotFGSEA(stats = stats, gene.set.name = g, gene.sets = gene_lists, fgsea = fgsea, class.name = 'ER status',
              enrichment.score.range = c(-0.25, max(fgsea$ES)))
 }
 
 
-# Single barcode plot
+# Combined barcode plot for all gene sets in a list
 replot_multiFGSEA(stats = stats, gene.sets = gene_lists, fgsea = fgsea, class.name = 'ER status')
+
+
